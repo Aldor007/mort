@@ -530,11 +530,11 @@ func (t *Transforms) calculateAutoCrop(info ImageInfo) (int, int, int, int) {
 
 	var wFactor, hFactor float64
 	if t.autoCropWidth != 0 {
-		wFactor = float64(info.width / t.autoCropWidth)
+		wFactor = float64(info.width) / float64(t.autoCropWidth)
 	}
 
 	if t.autoCropHeight != 0 {
-		hFactor = float64(info.height / t.autoCropHeight)
+		hFactor = float64(info.height) / float64(t.autoCropHeight)
 	}
 
 	var cropWidth, cropHeight float64
