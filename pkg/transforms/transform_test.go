@@ -389,6 +389,21 @@ func TestTransforms_ResizeCropAuto(t *testing.T) {
 	assert.Equal(t, "a9476be4baa3fb94", hashStr)
 }
 
+func TestTransforms_ResizeCropAutoPreservesAspectRatio(t *testing.T) {
+	trans := New()
+	trans.ResizeCropAuto(580, 320)
+
+	optsArr, err := trans.BimgOptions(ImageInfo{width: 1636, height: 1094})
+	assert.Nil(t, err)
+	assert.Equal(t, len(optsArr), 3)
+
+	cropOpts := optsArr[1]
+	assert.Equal(t, cropOpts.Left, 0)
+	assert.Equal(t, cropOpts.Top, 38)
+	assert.Equal(t, cropOpts.AreaWidth, 1636)
+	assert.Equal(t, cropOpts.AreaHeight, 903)
+}
+
 // Validation Tests
 
 func TestQualityValidation(t *testing.T) {
